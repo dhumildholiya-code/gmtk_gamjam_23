@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 8909087885155212917}
   - component: {fileID: 3336736718742814898}
   - component: {fileID: 8776599660103011296}
-  - component: {fileID: 3727920283096392291}
+  - component: {fileID: 7911042401996154533}
   m_Layer: 7
   m_Name: Simple Boat
   m_TagString: Untagged
@@ -187,7 +187,7 @@ Transform:
   - {fileID: 5043530645427106475}
   - {fileID: 5364146024381865783}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &3336736718742814898
 BoxCollider2D:
@@ -261,7 +261,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3727920283096392291
+--- !u!114 &7911042401996154533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -276,13 +276,13 @@ MonoBehaviour:
   detectLayer:
     serializedVersion: 2
     m_Bits: 64
-  detectRadius: 8
+  detectRadius: 7
   maxHealth: 10
   health: {fileID: 7129108850538658467}
   healthBar: {fileID: 1398612577969588127}
   chaseSpeed: 1
-  attackRange: 1
-  attackTime: 2.5
+  attackRange: 1.5
+  attackTime: 3
   lootDamage: 5
 --- !u!1 &7129108850538658467
 GameObject:

@@ -88,7 +88,7 @@ namespace gmtk_gamejam.EnemySystem
             transform.up = dir;
 
             float targetDistance = dir.magnitude;
-            _inAttackRange = targetDistance < attackRange;
+            _inAttackRange = targetDistance <= attackRange - .2f;
 
             //Transition Condition
             if (_inAttackRange)
@@ -108,7 +108,7 @@ namespace gmtk_gamejam.EnemySystem
 
             Vector2 dir = _target.Position - (Vector2)transform.position;
             float targetDistance = dir.magnitude;
-            _inAttackRange = targetDistance < attackRange;
+            _inAttackRange = targetDistance <= attackRange;
             transform.up = dir;
 
             if (!_inAttackRange)

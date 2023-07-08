@@ -124,7 +124,7 @@ MonoBehaviour:
   attackMoveSpeed: 5
   turnModifier: 10
   wiggleModifier: {x: 2, y: 5}
-  wiggleAmplitude: {x: 0.01, y: 0.25}
+  wiggleAmplitude: {x: 0.05, y: 0.25}
   attackLayer:
     serializedVersion: 2
     m_Bits: 128

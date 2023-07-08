@@ -11,6 +11,7 @@ namespace gmtk_gamejam
             Input,
             Launch,
             Attack,
+            Return,
         }
         [Header("Movement")]
         [SerializeField][Range(.05f, .1f)] private float roamSpeed;
@@ -30,10 +31,14 @@ namespace gmtk_gamejam
         private SharkState _state;
         private Camera _cam;
 
+        private QuadraticBezierCurve _attackCurve;
+        private QuadraticBezierCurve _returnCurve;
+
         private Transform _target;
         private Vector2 _prevPos;
-        private Vector2 _pos;
+        private Vector2 _lastPosBeforeAttack;
         private float _time;
+        private float _curveTime;
         private float _phase;
         private float _moveRadius;
 
@@ -42,8 +47,8 @@ namespace gmtk_gamejam
             _rb = GetComponent<Rigidbody2D>();
             _cam = Camera.main;
             ChangeState(SharkState.Idle);
-            _moveRadius = Random.Range(.5f, _raft.SharkMoveRange);
-            roamSpeed = Random.Range(.05f, .1f);
+            _moveRadius = Random.Range(.9f, _raft.SharkMoveRange);
+            roamSpeed = Random.Range(.09f, .13f);
             _phase = Random.Range(0, 2 * Mathf.PI);
             _prevPos = _rb.position;
         }
@@ -61,7 +66,7 @@ namespace gmtk_gamejam
         {
             if (_raft == null) return;
 
-            _rb.MovePosition(_pos);
+            //_rb.MovePosition(_pos);
         }
 
         #region StateMachine Methods
@@ -79,19 +84,59 @@ namespace gmtk_gamejam
                     LaunchState();
                     break;
                 case SharkState.Attack:
+                    AttackSate();
+                    break;
+                case SharkState.Return:
+                    ReturnState();
                     break;
                 default:
                     break;
             }
         }
 
-        private void LaunchState()
+        private void ReturnState()
         {
-            Vector2 dir = _target.position - transform.position;
-            Vector2 targetPos = Vector2.MoveTowards(_rb.position, _target.position, Time.deltaTime * attackMoveSpeed);
-            _pos = targetPos;
+            _curveTime += Time.deltaTime;
+            Vector2 targetPos = _returnCurve.GetPos(_curveTime);
+            transform.position = targetPos;
+
+            transform.up = _returnCurve.GetTangent(_curveTime);
 
             //Transition Condition
+            if (_curveTime >= 1f)
+            {
+                _curveTime = 0f;
+                ChangeState(SharkState.Idle);
+            }
+        }
+
+        private void AttackSate()
+        {
+            ITakeDamage damagable = _target.GetComponent<ITakeDamage>();
+            if (damagable != null)
+            {
+                damagable.TakeDamage(attackDamage);
+            }
+            // Check for other nearby enemies if attack target is > 1.
+            // go to launch if we find other enemies.
+
+            ChangeState(SharkState.Return);
+        }
+
+        private void LaunchState()
+        {
+            _curveTime += Time.deltaTime;
+            Vector2 targetPos = _attackCurve.GetPos(_curveTime);
+            transform.position = targetPos;
+
+            transform.up = _attackCurve.GetTangent(_curveTime);
+
+            //Transition Condition
+            if (_curveTime >= 1f)
+            {
+                _curveTime = 0f;
+                ChangeState(SharkState.Attack);
+            }
         }
 
         private void InputState()
@@ -142,13 +187,13 @@ namespace gmtk_gamejam
             // Position
             Vector2 targetPos = new Vector2(Mathf.Cos(2 * Mathf.PI * _time + _phase), Mathf.Sin(2 * Mathf.PI * _time + _phase)) * moveRadius;
             targetPos += _raft.Position;
-            _pos = targetPos;
+            transform.position = Vector2.Lerp(transform.position, targetPos, Time.deltaTime * 5f);
 
             //Rotation
-            Vector2 dir = (_pos - _prevPos).normalized;
+            Vector2 dir = (targetPos - _prevPos).normalized;
             transform.up = Vector2.Lerp(transform.up, dir, Time.deltaTime * turnModifier);
 
-            _prevPos = _pos;
+            _prevPos = targetPos;
 
             //transition Condition.
             //using OnMousedown
@@ -168,9 +213,18 @@ namespace gmtk_gamejam
                     line.gameObject.SetActive(true);
                     break;
                 case SharkState.Launch:
+                    _curveTime = 0f;
+                    _attackCurve = new QuadraticBezierCurve(transform.position, _target.position);
+                    _lastPosBeforeAttack = transform.position;
                     line.gameObject.SetActive(false);
                     break;
                 case SharkState.Attack:
+                    _curveTime = 0f;
+                    line.gameObject.SetActive(false);
+                    break;
+                case SharkState.Return:
+                    _curveTime = 0f;
+                    _returnCurve = new QuadraticBezierCurve(transform.position, _lastPosBeforeAttack);
                     line.gameObject.SetActive(false);
                     break;
             }
@@ -184,9 +238,25 @@ namespace gmtk_gamejam
 
         private void OnDrawGizmosSelected()
         {
-            if (_raft == null) return;
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(_raft.Position, _moveRadius);
+            if (_raft != null)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(_raft.Position, _moveRadius);
+            }
+
+            Gizmos.color = Color.magenta;
+            if(_attackCurve != null)
+            {
+                Gizmos.DrawWireSphere(_attackCurve.P0, .2f);
+                Gizmos.DrawWireSphere(_attackCurve.P1, .2f);
+                Gizmos.DrawWireSphere(_attackCurve.P2, .2f);
+            }
+            if(_returnCurve != null)
+            {
+                Gizmos.DrawWireSphere(_returnCurve.P0, .2f);
+                Gizmos.DrawWireSphere(_returnCurve.P1, .2f);
+                Gizmos.DrawWireSphere(_returnCurve.P2, .2f);
+            }
         }
     }
 }
