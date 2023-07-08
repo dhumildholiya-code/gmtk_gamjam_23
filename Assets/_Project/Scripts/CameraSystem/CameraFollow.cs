@@ -5,6 +5,7 @@ namespace gmtk_gamejam.CameraSystem
     public class CameraFollow : MonoBehaviour
     {
         [SerializeField] private float yOffset;
+        [SerializeField] private float xBoundry;
         [SerializeField] private float smoothFactor;
 
         private Transform _target;
@@ -21,6 +22,7 @@ namespace gmtk_gamejam.CameraSystem
         private void Update()
         {
             if (_target == null) return;
+            if (transform.position.x >= xBoundry) return;
 
             Vector3 targetPos = new Vector3(_target.position.x, yOffset, transform.position.z) - _offset;
             transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothFactor);

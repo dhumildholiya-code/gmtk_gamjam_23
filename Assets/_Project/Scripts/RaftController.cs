@@ -142,6 +142,10 @@ namespace gmtk_gamejam
                 transform.position = directionalProp.transform.position;
                 Move(directionalProp.direction);
             }
+            if (other.CompareTag("levelComplete"))
+            {
+                Debug.Log("win");
+            }
         }
 
         private void OnDrawGizmos()

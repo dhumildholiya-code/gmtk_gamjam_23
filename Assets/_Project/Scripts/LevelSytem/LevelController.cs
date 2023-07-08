@@ -14,6 +14,7 @@ namespace gmtk_gamejam.LevelSystem
         [Header("Prefabs")]
         [SerializeField] private RaftController raftPrefab;
         [SerializeField] private GameObject obstaclePrefab;
+        [SerializeField] private GameObject levelCompletePrefab;
 
         private List<GameObject> _obstacles;
         private RaftController _raft;
@@ -47,6 +48,9 @@ namespace gmtk_gamejam.LevelSystem
                                 raft.transform.position = pos;
                                 _raft = raft;
                                 cameraFollow.SetTarget(_raft.transform);
+                                break;
+                            case "levelcomplete_tile":
+                                GameObject levelComplete = Instantiate(levelCompletePrefab, pos, Quaternion.identity);
                                 break;
                             default:
                                 break;
