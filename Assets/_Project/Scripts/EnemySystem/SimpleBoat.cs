@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace gmtk_gamejam.EnemySystem
 {
-    public class SimpleBoat : MonoBehaviour, ITakeDamage
+    public class SimpleBoat : MonoBehaviour, ITakeDamage, ITarget
     {
         //Events
         public static event System.Action<int> OnDeathCollectExp;
@@ -40,6 +40,8 @@ namespace gmtk_gamejam.EnemySystem
         private float _attackTimer;
         private EnemyState _state;
 
+        public ITakeDamage Damagable => this;
+
         private void Start()
         {
             _currentHealth = maxHealth;
@@ -66,6 +68,15 @@ namespace gmtk_gamejam.EnemySystem
             }
             healthBar.fillAmount = _currentHealth * 1f / maxHealth;
         }
+        public Vector2 GetPos(float timePased)
+        {
+            if(_speed <= 0f)
+            {
+                return transform.position;
+            }
+            Vector2 pos = transform.position + transform.up *_speed * timePased; 
+            return pos;
+        }
 
         #region StateMachine Methods
         private void UpdateState()
@@ -86,7 +97,6 @@ namespace gmtk_gamejam.EnemySystem
 
         private void ChaseState()
         {
-            _speed = chaseSpeed;
             Vector2 dir = _target.Position - (Vector2)transform.position;
             Vector2 targetPos = Vector2.MoveTowards(transform.position, _target.Position, _speed * Time.deltaTime);
             transform.position = targetPos;
@@ -144,12 +154,15 @@ namespace gmtk_gamejam.EnemySystem
             switch (_state)
             {
                 case EnemyState.Detect:
+                    _speed = 0f;
                     _animator.SetBool("run", false);
                     break;
                 case EnemyState.Chase:
+                    _speed = chaseSpeed;
                     _animator.SetBool("run", true);
                     break;
                 case EnemyState.Attack:
+                    _speed = 0f;
                     _animator.SetBool("run", false);
                     break;
             }

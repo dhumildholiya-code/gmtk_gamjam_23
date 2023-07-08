@@ -1,3 +1,4 @@
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace gmtk_gamejam
@@ -32,7 +33,7 @@ namespace gmtk_gamejam
         private QuadraticBezierCurve _attackCurve;
         private QuadraticBezierCurve _returnCurve;
 
-        private Transform _target;
+        private ITarget _target;
         private Vector2 _prevPos;
         private Vector2 _lastPosBeforeAttack;
         private float _time;
@@ -110,11 +111,7 @@ namespace gmtk_gamejam
 
         private void AttackSate()
         {
-            ITakeDamage damagable = _target.GetComponent<ITakeDamage>();
-            if (damagable != null)
-            {
-                damagable.TakeDamage(sharkData.attackDamage);
-            }
+            _target.Damagable.TakeDamage(sharkData.attackDamage);
             // Check for other nearby enemies if attack target is > 1.
             // go to launch if we find other enemies.
 
@@ -165,8 +162,11 @@ namespace gmtk_gamejam
                 }
                 else
                 {
-                    _target = hit.collider.transform;
-                    ChangeState(SharkState.Launch);
+                    _target = hit.collider.GetComponent<ITarget>();
+                    if (_target != null)
+                        ChangeState(SharkState.Launch);
+                    else
+                        ChangeState(SharkState.Idle);
                 }
             }
         }
@@ -212,7 +212,7 @@ namespace gmtk_gamejam
                     break;
                 case SharkState.Launch:
                     _curveTime = 0f;
-                    _attackCurve = new QuadraticBezierCurve(transform.position, _target.position);
+                    _attackCurve = new QuadraticBezierCurve(transform.position, _target.GetPos(.8f));
                     _lastPosBeforeAttack = transform.position;
                     line.gameObject.SetActive(false);
                     break;
@@ -243,13 +243,13 @@ namespace gmtk_gamejam
             }
 
             Gizmos.color = Color.magenta;
-            if(_attackCurve != null)
+            if (_attackCurve != null)
             {
                 Gizmos.DrawWireSphere(_attackCurve.P0, .2f);
                 Gizmos.DrawWireSphere(_attackCurve.P1, .2f);
                 Gizmos.DrawWireSphere(_attackCurve.P2, .2f);
             }
-            if(_returnCurve != null)
+            if (_returnCurve != null)
             {
                 Gizmos.DrawWireSphere(_returnCurve.P0, .2f);
                 Gizmos.DrawWireSphere(_returnCurve.P1, .2f);
