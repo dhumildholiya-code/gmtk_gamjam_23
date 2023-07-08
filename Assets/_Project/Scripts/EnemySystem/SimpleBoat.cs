@@ -1,10 +1,10 @@
 using System;
-using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace gmtk_gamejam.EnemySystem
 {
-    public class SimpleBoat : MonoBehaviour
+    public class SimpleBoat : MonoBehaviour, ITakeDamage
     {
         private enum EnemyState
         {
@@ -16,6 +16,10 @@ namespace gmtk_gamejam.EnemySystem
         [Header("Detect")]
         [SerializeField] private LayerMask detectLayer;
         [SerializeField] private float detectRadius;
+        [Header("Health")]
+        [SerializeField] private int maxHealth;
+        [SerializeField] private GameObject health;
+        [SerializeField] private Image healthBar;
         [Header("Movement")]
         [SerializeField] private float chaseSpeed;
         [Header("Attack")]
@@ -27,12 +31,15 @@ namespace gmtk_gamejam.EnemySystem
         private Rigidbody2D _rb;
 
         private float _speed;
+        private int _currentHealth;
         private bool _inAttackRange;
         private float _attackTimer;
         private EnemyState _state;
 
         private void Start()
         {
+            _currentHealth = maxHealth;
+            health.SetActive(false);
             _rb = GetComponent<Rigidbody2D>();
             ChangeState(EnemyState.Detect);
         }
@@ -40,6 +47,19 @@ namespace gmtk_gamejam.EnemySystem
         private void Update()
         {
             UpdateState();
+        }
+        public void TakeDamage(int damage)
+        {
+            if (_currentHealth - damage <= 0)
+            {
+                Destroy(gameObject);
+            }
+            _currentHealth -= damage;
+            if (_currentHealth < maxHealth)
+            {
+                health.SetActive(true);
+            }
+            healthBar.fillAmount = _currentHealth * 1f / maxHealth;
         }
 
         #region StateMachine Methods
@@ -67,7 +87,7 @@ namespace gmtk_gamejam.EnemySystem
             transform.position = targetPos;
             transform.up = dir;
 
-            float targetDistance = dir.magnitude; 
+            float targetDistance = dir.magnitude;
             _inAttackRange = targetDistance < attackRange;
 
             //Transition Condition
@@ -87,7 +107,7 @@ namespace gmtk_gamejam.EnemySystem
             _attackTimer -= Time.deltaTime;
 
             Vector2 dir = _target.Position - (Vector2)transform.position;
-            float targetDistance = dir.magnitude; 
+            float targetDistance = dir.magnitude;
             _inAttackRange = targetDistance < attackRange;
             transform.up = dir;
 
@@ -130,5 +150,6 @@ namespace gmtk_gamejam.EnemySystem
             Gizmos.DrawWireSphere(transform.position, detectRadius);
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
+
     }
 }
