@@ -1,5 +1,5 @@
+using gmtk_gamejam.PropSystem;
 using System;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 namespace gmtk_gamejam
@@ -11,7 +11,10 @@ namespace gmtk_gamejam
     }
     public class PlayerController : MonoBehaviour
     {
+        public static event Action<PlayerState> OnPlayerStateChanged;
+
         [SerializeField] private PlayerState startState;
+
         private PlayerState _state;
 
         private void Start()
@@ -63,6 +66,7 @@ namespace gmtk_gamejam
         private void ChangeState(PlayerState newState)
         {
             _state = newState;
+            OnPlayerStateChanged?.Invoke(_state);
         }
         #endregion
     }

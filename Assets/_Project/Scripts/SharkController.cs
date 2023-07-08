@@ -52,7 +52,7 @@ namespace gmtk_gamejam
             targetPos += _raft.Position;
             _pos = targetPos;
 
-            //Rotaion
+            //Rotation
             Vector2 dir = (_pos - _prevPos).normalized;
             transform.up = Vector2.Lerp(transform.up, dir, Time.deltaTime * turnModifier);
 
