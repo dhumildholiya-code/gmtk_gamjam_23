@@ -13,6 +13,7 @@ namespace gmtk_gamejam
         [SerializeField] private float moveSpeed;
 
         [Header("Shark variables")]
+        [SerializeField] private int startSharkCount;
         [SerializeField] private float sharkSpawnRange;
 
         [SerializeField] private float sharkMoveRange;
@@ -24,11 +25,13 @@ namespace gmtk_gamejam
 
         private Rigidbody2D _rb;
         private List<SharkController> _sharks;
+        public int CurrentSharkCount => _sharks.Count;
 
         private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
             _sharks = new List<SharkController>();
+            CreateAddShark();
             Move(Direction.East);
         }
 
@@ -55,8 +58,8 @@ namespace gmtk_gamejam
             transform.up = _rb.velocity;
         }
 
-        [ContextMenu("Add Shark")]
-        public void AddShark()
+        [ContextMenu("Create and Add Shark")]
+        public void CreateAddShark()
         {
             Vector2 pos = Random.insideUnitCircle * sharkSpawnRange + (Vector2)transform.position;
             SharkController shark = Instantiate(sharkPrefab, pos, Quaternion.identity);
