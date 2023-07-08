@@ -1,12 +1,14 @@
 using gmtk_gamejam.PropSystem;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 namespace gmtk_gamejam
 {
     public class RaftController : MonoBehaviour
     {
+        //Statice Events
+        public static event System.Action<int, int> OnTresureChange;
+
         [Header("Reference")]
         [SerializeField] private SharkController sharkPrefab;
 
@@ -72,6 +74,7 @@ namespace gmtk_gamejam
                 // TODO : die / game over.
             }
             _currentTresure -= amount;
+            OnTresureChange?.Invoke(_currentTresure, maxTresure);
         }
 
         [ContextMenu("Create and Add Shark")]
