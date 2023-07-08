@@ -43,8 +43,6 @@ namespace gmtk_gamejam
 
         private void PropSetupState()
         {
-            Time.timeScale = 0f;
-
             //state Transition logic
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -54,8 +52,6 @@ namespace gmtk_gamejam
 
         private void SimulationState()
         {
-            Time.timeScale = 1.0f;
-
             //state Transition logic
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -66,6 +62,15 @@ namespace gmtk_gamejam
         private void ChangeState(PlayerState newState)
         {
             _state = newState;
+            switch (_state)
+            {
+                case PlayerState.Simulation:
+                    Time.timeScale = 1.0f;
+                    break;
+                case PlayerState.PropSetup:
+                    Time.timeScale = 0f;
+                    break;
+            }
             OnPlayerStateChanged?.Invoke(_state);
         }
         #endregion

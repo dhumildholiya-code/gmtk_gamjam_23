@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using UnityEngine;
 
 namespace gmtk_gamejam
@@ -23,8 +22,7 @@ namespace gmtk_gamejam
         [Header("Attack")]
         [SerializeField] private LayerMask attackLayer;
         [SerializeField] private LineRenderer line;
-        [SerializeField] private int attackDamage;
-        [SerializeField] private float attackRange;
+        [SerializeField] private SharkData sharkData;
 
         private Rigidbody2D _rb;
         private RaftController _raft;
@@ -115,7 +113,7 @@ namespace gmtk_gamejam
             ITakeDamage damagable = _target.GetComponent<ITakeDamage>();
             if (damagable != null)
             {
-                damagable.TakeDamage(attackDamage);
+                damagable.TakeDamage(sharkData.attackDamage);
             }
             // Check for other nearby enemies if attack target is > 1.
             // go to launch if we find other enemies.
@@ -143,7 +141,7 @@ namespace gmtk_gamejam
         {
             Vector2 mouseWorldPos = _cam.ScreenToWorldPoint(Input.mousePosition);
             Vector2 aimDir = mouseWorldPos - (Vector2)transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, aimDir, attackRange, attackLayer);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, aimDir, sharkData.attackRange, attackLayer);
             line.SetPosition(0, transform.position);
             if (hit.collider != null)
             {
@@ -155,7 +153,7 @@ namespace gmtk_gamejam
             {
                 line.startColor = Color.white;
                 line.endColor = Color.white;
-                line.SetPosition(1, (Vector2)transform.position + attackRange * aimDir.normalized);
+                line.SetPosition(1, (Vector2)transform.position + sharkData.attackRange * aimDir.normalized);
             }
 
             //Transition Condition

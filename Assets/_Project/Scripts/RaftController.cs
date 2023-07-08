@@ -1,3 +1,4 @@
+using gmtk_gamejam.AbillitySystem;
 using gmtk_gamejam.EnemySystem;
 using gmtk_gamejam.PropSystem;
 using System.Collections.Generic;
@@ -47,6 +48,7 @@ namespace gmtk_gamejam
             _rb = GetComponent<Rigidbody2D>();
             _sharks = new List<SharkController>();
             SimpleBoat.OnDeathCollectExp += AddExp;
+            AddSharkAbillity.OnAddShark += CreateAddShark;
             _currentTresure = maxTresure;
             _currentExp = 0;
             CreateAddShark();
@@ -55,6 +57,7 @@ namespace gmtk_gamejam
         private void OnDestroy()
         {
             SimpleBoat.OnDeathCollectExp -= AddExp;
+            AddSharkAbillity.OnAddShark -= CreateAddShark;
         }
 
         public void Move(Direction direction)
@@ -102,7 +105,7 @@ namespace gmtk_gamejam
         }
 
         [ContextMenu("Create and Add Shark")]
-        public void CreateAddShark()
+        private void CreateAddShark()
         {
             Vector2 pos = Random.insideUnitCircle * sharkSpawnRange + (Vector2)transform.position;
             SharkController shark = Instantiate(sharkPrefab, pos, Quaternion.identity);
