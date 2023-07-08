@@ -7972,6 +7972,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3727920283096392291, guid: 26cd786ac893bf34bbad215a72dd4f4c, type: 3}
+      propertyPath: detectRadius
+      value: 2.36
+      objectReference: {fileID: 0}
     - target: {fileID: 6159241756299588080, guid: 26cd786ac893bf34bbad215a72dd4f4c, type: 3}
       propertyPath: m_Name
       value: Simple Boat

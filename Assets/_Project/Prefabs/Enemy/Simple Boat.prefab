@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 3336736718742814898}
   - component: {fileID: 8776599660103011296}
   - component: {fileID: 3727920283096392291}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Simple Boat
   m_TagString: Untagged
   m_Icon: {fileID: 0}

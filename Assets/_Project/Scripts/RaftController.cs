@@ -34,6 +34,7 @@ namespace gmtk_gamejam
         public int CurrentSharkCount => _sharks.Count;
 
         private int _currentTresure;
+        private Direction _oldDirection;
 
         private void Start()
         {
@@ -49,27 +50,38 @@ namespace gmtk_gamejam
             switch (direction)
             {
                 case Direction.North:
+                    _oldDirection = direction;
                     _rb.velocity = Vector2.up * moveSpeed;
+                    transform.up = _rb.velocity;
                     break;
                 case Direction.South:
+                    _oldDirection = direction;
                     _rb.velocity = Vector2.down * moveSpeed;
+                    transform.up = _rb.velocity;
                     break;
                 case Direction.West:
+                    _oldDirection = direction;
                     _rb.velocity = Vector2.left * moveSpeed;
+                    transform.up = _rb.velocity;
                     break;
                 case Direction.East:
+                    _oldDirection = direction;
                     _rb.velocity = Vector2.right * moveSpeed;
+                    transform.up = _rb.velocity;
                     break;
                 case Direction.None:
                     _rb.velocity = Vector2.zero;
                     break;
             }
-            transform.up = _rb.velocity;
+        }
+        public void MoveContinue()
+        {
+            Move(_oldDirection);
         }
 
         public void RemoveTresure(int amount)
         {
-            if(_currentTresure - amount <= 0)
+            if (_currentTresure - amount <= 0)
             {
                 // TODO : die / game over.
             }
@@ -95,7 +107,7 @@ namespace gmtk_gamejam
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(other.gameObject.TryGetComponent<DirectionalProp>(out var directionalProp))
+            if (other.gameObject.TryGetComponent<DirectionalProp>(out var directionalProp))
             {
                 transform.position = directionalProp.transform.position;
                 Move(directionalProp.direction);
