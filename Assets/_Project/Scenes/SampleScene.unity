@@ -5353,6 +5353,10 @@ MonoBehaviour:
     count: 4
   - prop: {fileID: 25768993168741076, guid: d24d0e0e1acf4d840a134eff5cfb30c8, type: 3}
     count: 2
+  - prop: {fileID: 6404129472412060426, guid: ca0e7662830bdd341822d41cf17696bf, type: 3}
+    count: 4
+  - prop: {fileID: 5392608270762980037, guid: c6929f12fe3364f40ae418ed4c9d04a0, type: 3}
+    count: 4
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5366,6 +5370,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5515,6 +5520,20 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33257b9b260a85b499f95a8a2cde47ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yOffset: 0
+  smoothFactor: 5
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -7064,6 +7083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnable: {fileID: 1721096586}
   obstacleParent: {fileID: 341489805}
+  cameraFollow: {fileID: 519420034}
   raftPrefab: {fileID: -4532523003921160942, guid: 3c9b9ca1ea3445847bc0d01a329b1703, type: 3}
   obstaclePrefab: {fileID: 3639939899118992560, guid: 05c3e917d6f690945a1d200f6f031900, type: 3}
 --- !u!1 &1200867699

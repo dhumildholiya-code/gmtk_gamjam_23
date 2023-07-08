@@ -1,3 +1,4 @@
+using gmtk_gamejam.CameraSystem;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,6 +9,8 @@ namespace gmtk_gamejam.LevelSystem
     {
         [SerializeField] private Tilemap spawnable;
         [SerializeField] private Transform obstacleParent;
+        [Header("Reference")]
+        [SerializeField] private CameraFollow cameraFollow;
         [Header("Prefabs")]
         [SerializeField] private RaftController raftPrefab;
         [SerializeField] private GameObject obstaclePrefab;
@@ -43,6 +46,7 @@ namespace gmtk_gamejam.LevelSystem
                                 RaftController raft = Instantiate(raftPrefab);
                                 raft.transform.position = pos;
                                 _raft = raft;
+                                cameraFollow.SetTarget(_raft.transform);
                                 break;
                             default:
                                 break;

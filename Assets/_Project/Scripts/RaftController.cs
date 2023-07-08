@@ -1,3 +1,4 @@
+using gmtk_gamejam.PropSystem;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -74,8 +75,13 @@ namespace gmtk_gamejam
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D other)
         {
+            if(other.gameObject.TryGetComponent<DirectionalProp>(out var directionalProp))
+            {
+                transform.position = directionalProp.transform.position;
+                Move(directionalProp.direction);
+            }
         }
 
         private void OnDrawGizmos()

@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sharkPrefab: {fileID: -2082550004484075759, guid: 43530b8b0b6357e4ca04410f86fca3f3, type: 3}
-  moveSpeed: 0.1
+  moveSpeed: 0.5
   startSharkCount: 1
   sharkSpawnRange: 2
   sharkMoveRange: 2
