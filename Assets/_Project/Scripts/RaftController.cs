@@ -13,6 +13,9 @@ namespace gmtk_gamejam
         [Header("Movement")]
         [SerializeField] private float moveSpeed;
 
+        [Header("Tresure")]
+        [SerializeField] private int maxTresure;
+
         [Header("Shark variables")]
         [SerializeField] private int startSharkCount;
         [SerializeField] private float sharkSpawnRange;
@@ -28,10 +31,13 @@ namespace gmtk_gamejam
         private List<SharkController> _sharks;
         public int CurrentSharkCount => _sharks.Count;
 
+        private int _currentTresure;
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
             _sharks = new List<SharkController>();
+            _currentTresure = maxTresure;
             CreateAddShark();
             Move(Direction.East);
         }
@@ -57,6 +63,15 @@ namespace gmtk_gamejam
                     break;
             }
             transform.up = _rb.velocity;
+        }
+
+        public void RemoveTresure(int amount)
+        {
+            if(_currentTresure - amount <= 0)
+            {
+                // TODO : die / game over.
+            }
+            _currentTresure -= amount;
         }
 
         [ContextMenu("Create and Add Shark")]

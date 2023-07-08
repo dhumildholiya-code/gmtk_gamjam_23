@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4534026025528860784}
   - component: {fileID: 4868975788413952808}
   - component: {fileID: -4532523003921160942}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Raft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 8221311195457995998}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!61 &4534026025528860784
 BoxCollider2D:
@@ -103,7 +103,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharkPrefab: {fileID: -2082550004484075759, guid: 43530b8b0b6357e4ca04410f86fca3f3, type: 3}
   moveSpeed: 0.5
+  maxTresure: 100
   startSharkCount: 1
   sharkSpawnRange: 2
   sharkMoveRange: 2

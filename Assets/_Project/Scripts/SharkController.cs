@@ -40,7 +40,6 @@ namespace gmtk_gamejam
             //Time
             _time += Time.deltaTime * roamSpeed;
 
-
             // Wiggle Motion on Circular path
             float moveRadius01 = Mathf.InverseLerp(.5f, _raft.SharkMoveRange, _moveRadius);
             float wiggleMultiplier = Mathf.Lerp(wiggleModifier.x, wiggleModifier.y, moveRadius01);
