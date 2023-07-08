@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 3336736718742814898}
   - component: {fileID: 8776599660103011296}
   - component: {fileID: 7911042401996154533}
+  - component: {fileID: 7945239946451263495}
   m_Layer: 7
   m_Name: Simple Boat
   m_TagString: Untagged
@@ -285,6 +286,27 @@ MonoBehaviour:
   attackTime: 3
   lootDamage: 5
   expPoints: 5
+--- !u!95 &7945239946451263495
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159241756299588080}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aedc8e2d9a20dd34d9196b73d6ef7661, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7129108850538658467
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +368,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2160508534847749375
 MonoBehaviour:
@@ -461,12 +483,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0027e658847065447b2ba585940a6c58, type: 3}
+  m_Sprite: {fileID: 1890657398, guid: 3aeeabcec0c83724295956d9e65c9c49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.875, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -32,7 +32,7 @@ namespace gmtk_gamejam.EnemySystem
         [SerializeField] private int expPoints;
 
         private RaftController _target;
-        private Rigidbody2D _rb;
+        private Animator _animator;
 
         private float _speed;
         private int _currentHealth;
@@ -44,7 +44,7 @@ namespace gmtk_gamejam.EnemySystem
         {
             _currentHealth = maxHealth;
             health.SetActive(false);
-            _rb = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
             ChangeState(EnemyState.Detect);
         }
 
@@ -141,6 +141,18 @@ namespace gmtk_gamejam.EnemySystem
         private void ChangeState(EnemyState newState)
         {
             _state = newState;
+            switch (_state)
+            {
+                case EnemyState.Detect:
+                    _animator.SetBool("run", false);
+                    break;
+                case EnemyState.Chase:
+                    _animator.SetBool("run", true);
+                    break;
+                case EnemyState.Attack:
+                    _animator.SetBool("run", false);
+                    break;
+            }
         }
         #endregion
 
