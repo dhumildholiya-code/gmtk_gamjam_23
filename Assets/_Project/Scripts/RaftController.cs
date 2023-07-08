@@ -1,3 +1,4 @@
+using gmtk_gamejam.EnemySystem;
 using gmtk_gamejam.PropSystem;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace gmtk_gamejam
     {
         //Statice Events
         public static event System.Action<int, int> OnTresureChange;
+        public static event System.Action<int, int> OnExpChange;
+        public static event System.Action OnLevelUp;
 
         [Header("Reference")]
         [SerializeField] private SharkController sharkPrefab;
@@ -17,6 +20,8 @@ namespace gmtk_gamejam
 
         [Header("Tresure")]
         [SerializeField] private int maxTresure;
+        [Header("Experience")]
+        [SerializeField] private int maxExp;
 
         [Header("Shark variables")]
         [SerializeField] private int startSharkCount;
@@ -34,15 +39,22 @@ namespace gmtk_gamejam
         public int CurrentSharkCount => _sharks.Count;
 
         private int _currentTresure;
+        private int _currentExp;
         private Direction _oldDirection;
 
         private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
             _sharks = new List<SharkController>();
+            SimpleBoat.OnDeathCollectExp += AddExp;
             _currentTresure = maxTresure;
+            _currentExp = 0;
             CreateAddShark();
             Move(Direction.East);
+        }
+        private void OnDestroy()
+        {
+            SimpleBoat.OnDeathCollectExp -= AddExp;
         }
 
         public void Move(Direction direction)
@@ -102,6 +114,21 @@ namespace gmtk_gamejam
             if (_sharks.Contains(shark))
             {
                 _sharks.Remove(shark);
+            }
+        }
+        private void AddExp(int exp)
+        {
+            if(_currentExp + exp >= maxExp)
+            {
+                //Leve Up.
+                OnLevelUp?.Invoke();
+                _currentExp = 0;
+                OnExpChange?.Invoke(_currentExp, maxExp);
+            }
+            else
+            {
+                _currentExp += exp;
+                OnExpChange?.Invoke(_currentExp, maxExp);
             }
         }
 

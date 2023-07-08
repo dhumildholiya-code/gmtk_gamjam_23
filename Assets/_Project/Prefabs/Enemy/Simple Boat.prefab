@@ -276,14 +276,15 @@ MonoBehaviour:
   detectLayer:
     serializedVersion: 2
     m_Bits: 64
-  detectRadius: 7
-  maxHealth: 10
+  detectRadius: 6
+  maxHealth: 2
   health: {fileID: 7129108850538658467}
   healthBar: {fileID: 1398612577969588127}
   chaseSpeed: 1
   attackRange: 1.5
   attackTime: 3
   lootDamage: 5
+  expPoints: 5
 --- !u!1 &7129108850538658467
 GameObject:
   m_ObjectHideFlags: 0

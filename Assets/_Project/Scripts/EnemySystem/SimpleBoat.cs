@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +5,9 @@ namespace gmtk_gamejam.EnemySystem
 {
     public class SimpleBoat : MonoBehaviour, ITakeDamage
     {
+        //Events
+        public static event System.Action<int> OnDeathCollectExp;
+
         private enum EnemyState
         {
             Detect,
@@ -26,6 +28,8 @@ namespace gmtk_gamejam.EnemySystem
         [SerializeField] private float attackRange;
         [SerializeField] private float attackTime;
         [SerializeField] private int lootDamage;
+        [Header("Exp")]
+        [SerializeField] private int expPoints;
 
         private RaftController _target;
         private Rigidbody2D _rb;
@@ -52,6 +56,7 @@ namespace gmtk_gamejam.EnemySystem
         {
             if (_currentHealth - damage <= 0)
             {
+                OnDeathCollectExp?.Invoke(expPoints);
                 Destroy(gameObject);
             }
             _currentHealth -= damage;
