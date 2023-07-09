@@ -1,4 +1,5 @@
 using gmtk_gamejam.AbillitySystem;
+using gmtk_gamejam.CameraSystem;
 using gmtk_gamejam.PropSystem;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace gmtk_gamejam.LevelSystem
         [SerializeField] private int sharkCount;
         [SerializeField] private int maxTresure;
         [SerializeField] private Direction direction;
+        [SerializeField] private float xBound;
         [SerializeField] private int startTutorialId;
         [SerializeField] private int tutorialWindowCount;
         [Header("Level Reference")]
@@ -28,7 +30,7 @@ namespace gmtk_gamejam.LevelSystem
         private GameManager _gameManager;
         private RaftController _raft;
 
-        public void Setup(GameManager gameManager, RaftController raft)
+        public void Setup(GameManager gameManager, RaftController raft, CameraFollow camFollw)
         {
             _gameManager = gameManager;
             _raft = raft;
@@ -36,6 +38,7 @@ namespace gmtk_gamejam.LevelSystem
             propManager.Setup(_gameManager.uiPropList);
             abilityManager.Setup(_gameManager.levelUpPanel, _gameManager.cards);
             _playerController.Setup(startTutorialId, tutorialWindowCount);
+            camFollw.SetBoundry(xBound);
             SetupLevel();
         }
         public void CleanUp()

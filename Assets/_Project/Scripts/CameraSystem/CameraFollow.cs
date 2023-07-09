@@ -10,6 +10,10 @@ namespace gmtk_gamejam.CameraSystem
 
         private Transform _target;
         private Vector3 _offset;
+        public void SetBoundry(float x)
+        {
+            xBoundry = x;
+        }
 
         public void SetTarget(Transform target)
         {

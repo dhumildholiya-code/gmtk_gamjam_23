@@ -37,7 +37,7 @@ namespace gmtk_gamejam
 
         private GameState _state;
         private int _currentLevelId;
-        public int CurrentLevelId => _currentLevelId;
+        public int CurrentLevelId => _currentLevelId + 1;
         private LevelController _currentLevel;
         private CameraFollow _camFollow;
 
@@ -86,8 +86,7 @@ namespace gmtk_gamejam
                     StartCoroutine(Co_LoadLevel());
                     break;
                 case GameState.Gameplay:
-                    _camFollow.transform.position = new Vector3(0f,0f, -10f);
-                    _currentLevel.Setup(Instance, raft);
+                    _currentLevel.Setup(Instance, raft, _camFollow);
                     break;
                 case GameState.LevelComplete:
                     _currentLevel.CleanUp();

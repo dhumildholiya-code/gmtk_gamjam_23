@@ -4467,6 +4467,7 @@ MonoBehaviour:
   sharkCount: 1
   maxTresure: 50
   direction: 3
+  xBound: 5.6
   startTutorialId: 2
   tutorialWindowCount: 1
   spawnable: {fileID: 8814903524590387256}

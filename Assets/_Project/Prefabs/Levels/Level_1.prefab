@@ -61,7 +61,9 @@ MonoBehaviour:
   sharkCount: 1
   maxTresure: 50
   direction: 3
-  tutorial: 0
+  xBound: 18.8
+  startTutorialId: 0
+  tutorialWindowCount: 0
   spawnable: {fileID: 4811532021959902990}
   _playerController: {fileID: 3956937639601193868}
   propManager: {fileID: 4442925894194575697}
