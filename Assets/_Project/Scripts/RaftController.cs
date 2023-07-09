@@ -1,8 +1,8 @@
+using DG.Tweening;
 using gmtk_gamejam.AbillitySystem;
 using gmtk_gamejam.EnemySystem;
 using gmtk_gamejam.PropSystem;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace gmtk_gamejam
@@ -166,8 +166,10 @@ namespace gmtk_gamejam
         {
             if (other.gameObject.TryGetComponent<DirectionalProp>(out var directionalProp))
             {
-                transform.position = directionalProp.transform.position;
-                Move(directionalProp.direction);
+                transform.DOMove(directionalProp.transform.position, 1f).OnComplete(() =>
+                {
+                    Move(directionalProp.direction);
+                });
             }
             if (other.CompareTag("levelComplete"))
             {
