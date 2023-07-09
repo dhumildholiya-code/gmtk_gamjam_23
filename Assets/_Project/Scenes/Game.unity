@@ -1433,7 +1433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4af4f9db99e87c43bde41b40186cdbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: 1
+  levelToLoad: 2
   levels:
   - {fileID: 7213179780454623458, guid: 894f05048df0ba747b54d19d57044aeb, type: 3}
   - {fileID: 68854019309142967, guid: 79fee8164572f3a40be5fe8821a129b1, type: 3}
@@ -2067,7 +2067,6 @@ GameObject:
   - component: {fileID: 1245805625}
   - component: {fileID: 1245805628}
   - component: {fileID: 1245805627}
-  - component: {fileID: 1245805626}
   m_Layer: 0
   m_Name: WinMenu
   m_TagString: Untagged
@@ -2097,19 +2096,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1245805626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245805624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c278f3cc231bc9428811bc20a3ab618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelName: {fileID: 274792866}
 --- !u!114 &1245805627
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -91,7 +91,7 @@ namespace gmtk_gamejam
                 case GameState.LevelComplete:
                     _currentLevel.CleanUp();
                     Destroy(_currentLevel.gameObject);
-                    if (_currentLevelId + 1 == levels.Length)
+                    if (_currentLevelId + 1 >= levels.Length)
                     {
                         //All level are complete.
                         ChangeState(GameState.Win);
