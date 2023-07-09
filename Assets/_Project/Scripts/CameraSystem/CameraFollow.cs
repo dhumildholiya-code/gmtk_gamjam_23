@@ -26,6 +26,11 @@ namespace gmtk_gamejam.CameraSystem
 
             Vector3 targetPos = new Vector3(_target.position.x, yOffset, transform.position.z) - _offset;
             transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothFactor);
+
+            if(transform.position.x < 0f)
+            {
+                transform.position = new Vector3(0f, yOffset, transform.position.z);
+            }
         }
     }
 }

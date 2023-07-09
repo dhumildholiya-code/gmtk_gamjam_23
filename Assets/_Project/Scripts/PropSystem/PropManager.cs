@@ -60,6 +60,16 @@ namespace gmtk_gamejam.PropSystem
             }
             _uiPropList.gameObject.SetActive(false);
         }
+        public void CleanUp()
+        {
+            foreach (var key in _uiProps.Keys)
+            {
+                Destroy(_uiProps[key].gameObject);
+            }
+            _uiProps.Clear();
+            _props.Clear();
+            _propsCount.Clear();
+        }
         private void OnDestroy()
         {
             //Remove Events

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1280366599233491651}
+  - component: {fileID: 7800284338325950135}
   m_Layer: 0
   m_Name: Level_1
   m_TagString: Untagged
@@ -45,6 +46,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7800284338325950135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173529695907325779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6819b4451679dc244a7cc1d109fd45da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharkCount: 1
+  maxTresure: 50
+  direction: 3
+  spawnable: {fileID: 4811532021959902990}
+  propManager: {fileID: 4442925894194575697}
+  abilityManager: {fileID: 746763645173116876}
+  obstacleParent: {fileID: 4596016809330155863}
+  boulder1Prefab: {fileID: 3639939899118992560, guid: 05c3e917d6f690945a1d200f6f031900, type: 3}
+  boulder2Prefab: {fileID: 3639939899118992560, guid: cb70924d4369ebf4dbb9d4495514f052, type: 3}
+  levelCompletePrefab: {fileID: 1962157681764773547, guid: abbc91f20f692fd438a69fe49bc4e049, type: 3}
 --- !u!1 &1158824691842893359
 GameObject:
   m_ObjectHideFlags: 0
@@ -4327,7 +4350,7 @@ GameObject:
   - component: {fileID: 1455307018164076520}
   m_Layer: 0
   m_Name: Boundry
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6180,9 +6203,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8305558408587871005}
   - component: {fileID: 4647027801502430796}
-  - component: {fileID: 835493941252956911}
   m_Layer: 0
-  m_Name: Level Controller
+  m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6218,26 +6240,6 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &835493941252956911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6110732871867271820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6819b4451679dc244a7cc1d109fd45da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnable: {fileID: 4811532021959902990}
-  propManager: {fileID: 4442925894194575697}
-  abilityManager: {fileID: 746763645173116876}
-  obstacleParent: {fileID: 4596016809330155863}
-  raftPrefab: {fileID: -4532523003921160942, guid: 3c9b9ca1ea3445847bc0d01a329b1703, type: 3}
-  boulder1Prefab: {fileID: 3639939899118992560, guid: 05c3e917d6f690945a1d200f6f031900, type: 3}
-  boulder2Prefab: {fileID: 3639939899118992560, guid: cb70924d4369ebf4dbb9d4495514f052, type: 3}
-  levelCompletePrefab: {fileID: 1962157681764773547, guid: abbc91f20f692fd438a69fe49bc4e049, type: 3}
 --- !u!1001 &585556580961704464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6249,6 +6251,10 @@ PrefabInstance:
     - target: {fileID: 6159241756299588080, guid: 26cd786ac893bf34bbad215a72dd4f4c, type: 3}
       propertyPath: m_Name
       value: Simple Boat (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911042401996154533, guid: 26cd786ac893bf34bbad215a72dd4f4c, type: 3}
+      propertyPath: detectRadius
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8909087885155212917, guid: 26cd786ac893bf34bbad215a72dd4f4c, type: 3}
       propertyPath: m_RootOrder

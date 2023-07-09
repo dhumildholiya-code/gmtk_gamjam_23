@@ -53,9 +53,13 @@ namespace gmtk_gamejam
             _phase = Random.Range(0, 2 * Mathf.PI);
             _prevPos = _rb.position;
         }
-        public void Init(RaftController raft)
+        public void Setup(RaftController raft)
         {
             _raft = raft;
+        }
+        public void CleanUp()
+        {
+            sharkData.DataReset();
         }
 
         private void Update()

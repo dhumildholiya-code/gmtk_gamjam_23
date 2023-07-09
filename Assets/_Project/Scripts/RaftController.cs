@@ -2,6 +2,7 @@ using gmtk_gamejam.AbillitySystem;
 using gmtk_gamejam.EnemySystem;
 using gmtk_gamejam.PropSystem;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace gmtk_gamejam
@@ -49,15 +50,32 @@ namespace gmtk_gamejam
             _sharks = new List<SharkController>();
             SimpleBoat.OnDeathCollectExp += AddExp;
             AddSharkAbillity.OnAddShark += CreateAddShark;
-            _currentTresure = maxTresure;
-            _currentExp = 0;
-            CreateAddShark();
-            Move(Direction.East);
         }
         private void OnDestroy()
         {
             SimpleBoat.OnDeathCollectExp -= AddExp;
             AddSharkAbillity.OnAddShark -= CreateAddShark;
+        }
+        public void Setup(int maxTresure, int sharkCount, Direction direction)
+        {
+            this.maxTresure = maxTresure;
+            this.startSharkCount = sharkCount;
+            _currentTresure = maxTresure;
+            _currentExp = 0;
+            for (int i = 0; i < startSharkCount; i++)
+            {
+                CreateAddShark();
+            }
+            Move(direction);
+        }
+        public void CleanUp()
+        {
+            for (int i = _sharks.Count - 1; i >= 0; i--)
+            {
+                _sharks[i].CleanUp();
+                Destroy(_sharks[i].gameObject);
+            }
+            _sharks.Clear();
         }
 
         public void Move(Direction direction)
@@ -99,6 +117,7 @@ namespace gmtk_gamejam
             if (_currentTresure - amount <= 0)
             {
                 // TODO : die / game over.
+                GameManager.Instance.ChangeState(GameState.LevelFailed);
             }
             _currentTresure -= amount;
             OnTresureChange?.Invoke(_currentTresure, maxTresure);
@@ -109,7 +128,7 @@ namespace gmtk_gamejam
         {
             Vector2 pos = Random.insideUnitCircle * sharkSpawnRange + (Vector2)transform.position;
             SharkController shark = Instantiate(sharkPrefab, pos, Quaternion.identity);
-            shark.Init(this);
+            shark.Setup(this);
             _sharks.Add(shark);
         }
         public void RemoveShark(SharkController shark)
@@ -121,7 +140,7 @@ namespace gmtk_gamejam
         }
         private void AddExp(int exp)
         {
-            if(_currentExp + exp >= maxExp)
+            if (_currentExp + exp >= maxExp)
             {
                 //Leve Up.
                 OnLevelUp?.Invoke();
@@ -135,6 +154,13 @@ namespace gmtk_gamejam
             }
         }
 
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("obstacle"))
+            {
+                GameManager.Instance.ChangeState(GameState.LevelFailed);
+            }
+        }
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent<DirectionalProp>(out var directionalProp))
@@ -145,6 +171,7 @@ namespace gmtk_gamejam
             if (other.CompareTag("levelComplete"))
             {
                 Debug.Log("win");
+                GameManager.Instance.ChangeState(GameState.LevelComplete);
             }
         }
 

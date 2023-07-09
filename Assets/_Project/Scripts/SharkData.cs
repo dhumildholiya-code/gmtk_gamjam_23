@@ -10,7 +10,6 @@ namespace gmtk_gamejam
         public float bounceAttackRange;
         public int attackTarget;
 
-#if UNITY_EDITOR
         [ContextMenu("Data Reset")]
         public void DataReset()
         {
@@ -19,6 +18,5 @@ namespace gmtk_gamejam
             bounceAttackRange = 2f;
             attackTarget = 1;
         }
-#endif
     }
 }
