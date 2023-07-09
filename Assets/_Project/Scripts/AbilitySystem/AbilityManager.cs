@@ -14,10 +14,10 @@ namespace gmtk_gamejam.AbillitySystem
         {
             _levelUpPanel = levelUpPanel;
             _cards = cards;
+            _levelUpPanel.SetActive(false);
         }
         private void Start()
         {
-            _levelUpPanel.SetActive(false);
             RaftController.OnLevelUp += CreateCards;
         }
         private void OnDestroy()

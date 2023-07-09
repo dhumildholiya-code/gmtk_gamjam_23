@@ -15,11 +15,12 @@ namespace gmtk_gamejam.PropSystem
 
         private string _name;
 
-        public void Init(string name, Sprite propSprite, int count)
+        public void Init(string name, Direction direction, Sprite propSprite, int count)
         {
             _name = name;
             propImage.sprite = propSprite;
             countText.text = $"{count}";
+            propImage.transform.rotation = DirectionalProp.GetRotation(direction);
         }
         public void UpdateCount(int count)
         {

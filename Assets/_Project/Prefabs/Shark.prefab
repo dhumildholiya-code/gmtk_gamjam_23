@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8066178988470457855}
   - component: {fileID: 4623453344048827072}
   - component: {fileID: 8327120957308282068}
+  - component: {fileID: 7978814325340996666}
   - component: {fileID: -2082550004484075759}
   m_Layer: 8
   m_Name: Shark
@@ -109,6 +110,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &7978814325340996666
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077820100566220994}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 33f4eca6f95dad74c9235af60eb34b5b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-2082550004484075759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +372,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4fb7f7a7e1e07a249b3b2212e6f14b81, type: 3}
+  m_Sprite: {fileID: -2104481656, guid: c55b448c5ecb5d34aa50cbcb811b357e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

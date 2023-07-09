@@ -51,8 +51,12 @@ namespace gmtk_gamejam.PropSystem
             {
                 PropUi uiProp = Instantiate(propUiPrefab, _uiPropList);
                 BaseProp prop = _props[keyValue.Key];
-                uiProp.Init(prop.name, prop.propImage, _propsCount[prop.name]);
-                _uiProps.Add(keyValue.Key, uiProp);
+                if (prop is DirectionalProp)
+                {
+                    DirectionalProp directionalProp = prop as DirectionalProp;
+                    uiProp.Init(prop.name, directionalProp.direction, prop.propImage, _propsCount[prop.name]);
+                    _uiProps.Add(keyValue.Key, uiProp);
+                }
             }
             _uiPropList.gameObject.SetActive(false);
         }

@@ -16,7 +16,8 @@ namespace gmtk_gamejam.LevelSystem
         [SerializeField] private Transform obstacleParent;
         [Header("Prefabs")]
         [SerializeField] private RaftController raftPrefab;
-        [SerializeField] private GameObject obstaclePrefab;
+        [SerializeField] private GameObject boulder1Prefab;
+        [SerializeField] private GameObject boulder2Prefab;
         [SerializeField] private GameObject levelCompletePrefab;
 
         private List<GameObject> _obstacles;
@@ -48,9 +49,13 @@ namespace gmtk_gamejam.LevelSystem
                         Vector3 pos = spawnable.GetCellCenterWorld(new Vector3Int(x + bounds.position.x, y + bounds.position.y, 0));
                         switch (tile.name)
                         {
-                            case "obstacle_tile":
-                                GameObject obstacle = Instantiate(obstaclePrefab, pos, Quaternion.identity, obstacleParent);
-                                _obstacles.Add(obstacle);
+                            case "boulder1_tile":
+                                GameObject obstacle1 = Instantiate(boulder1Prefab, pos, Quaternion.identity, obstacleParent);
+                                _obstacles.Add(obstacle1);
+                                break;
+                            case "boulder2_tile":
+                                GameObject obstacle2 = Instantiate(boulder2Prefab, pos, Quaternion.identity, obstacleParent);
+                                _obstacles.Add(obstacle2);
                                 break;
                             case "water_tile":
                                 RaftController raft = Instantiate(raftPrefab);
