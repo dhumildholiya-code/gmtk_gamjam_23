@@ -108,8 +108,6 @@ namespace gmtk_gamejam
                     StartCoroutine(Co_LoadLevel());
                     break;
                 case GameState.Quit:
-                    _currentLevel.CleanUp();
-                    Destroy(_currentLevel.gameObject);
                     Application.Quit();
                     break;
                 case GameState.Win:

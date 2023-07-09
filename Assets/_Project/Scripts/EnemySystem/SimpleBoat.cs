@@ -23,6 +23,7 @@ namespace gmtk_gamejam.EnemySystem
         [SerializeField] private int maxHealth;
         [SerializeField] private GameObject health;
         [SerializeField] private Image healthBar;
+        [SerializeField] private ParticleSystem deathEffet;
         [Header("Movement")]
         [SerializeField] private float chaseSpeed;
         [Header("Attack")]
@@ -65,8 +66,8 @@ namespace gmtk_gamejam.EnemySystem
             {
                 _currentHealth = 0;
                 OnDeathCollectExp?.Invoke(expPoints);
-                if (gameObject)
-                    Destroy(gameObject);
+                Instantiate(deathEffet, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
             transform.DOShakePosition(.3f, .2f);
             _currentHealth -= damage;

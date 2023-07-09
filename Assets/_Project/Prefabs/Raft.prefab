@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sharkPrefab: {fileID: -2082550004484075759, guid: 43530b8b0b6357e4ca04410f86fca3f3, type: 3}
+  deathEffect: {fileID: 6124791863957974917, guid: d91f1a8e69f0ece4faf5be01cf7f1c6b, type: 3}
   moveSpeed: 0.8
   maxTresure: 100
   startExp: 4

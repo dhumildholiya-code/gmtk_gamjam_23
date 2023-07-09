@@ -16,6 +16,7 @@ namespace gmtk_gamejam
 
         [Header("Reference")]
         [SerializeField] private SharkController sharkPrefab;
+        [SerializeField] private ParticleSystem deathEffect;
 
         [Header("Movement")]
         [SerializeField] private float moveSpeed;
@@ -162,7 +163,9 @@ namespace gmtk_gamejam
         {
             if (other.gameObject.CompareTag("obstacle"))
             {
-                GameManager.Instance.ChangeStateDelay(GameState.LevelFailed, 1f);
+                Instantiate(deathEffect, transform.position, Quaternion.identity);
+                GameManager.Instance.ChangeStateDelay(GameState.LevelFailed, 2f);
+                gameObject.SetActive(false);
             }
         }
         private void OnTriggerEnter2D(Collider2D other)

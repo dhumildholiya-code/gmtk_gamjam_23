@@ -121,7 +121,7 @@ Transform:
   - {fileID: 5364146024381865783}
   - {fileID: 4599570102938047573}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &3336736718742814898
 BoxCollider2D:
@@ -214,6 +214,7 @@ MonoBehaviour:
   maxHealth: 2
   health: {fileID: 7129108850538658467}
   healthBar: {fileID: 1398612577969588127}
+  deathEffet: {fileID: 5353393537845343228, guid: 414994fc317936040b7082c7fe3001e5, type: 3}
   chaseSpeed: 1
   attackRange: 1.5
   attackTime: 3
