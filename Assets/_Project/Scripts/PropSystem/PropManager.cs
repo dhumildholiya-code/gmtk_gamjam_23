@@ -14,7 +14,6 @@ namespace gmtk_gamejam.PropSystem
         }
 
         [Header("Ui")]
-        [SerializeField] private Transform uiPropList;
         [SerializeField] private PropUi propUiPrefab;
 
         [SerializeField] private PropData[] data;
@@ -24,16 +23,17 @@ namespace gmtk_gamejam.PropSystem
         private Dictionary<string, PropUi> _uiProps;
 
         private Camera _cam;
+        private Transform _uiPropList;
         private BaseProp _currentProp;
         private bool _holdingProp;
 
         private void Start()
         {
             _cam = Camera.main;
-            Setup();
         }
-        private void Setup()
+        public void Setup(Transform uiPropList)
         {
+            _uiPropList = uiPropList;
             //Listen For Events
             PlayerController.OnPlayerStateChanged += HandlePlayerStateChange;
             PropUi.OnClickPropUi += HandlePropUiClick;
@@ -49,12 +49,12 @@ namespace gmtk_gamejam.PropSystem
             }
             foreach (var keyValue in _props)
             {
-                PropUi uiProp = Instantiate(propUiPrefab, uiPropList);
+                PropUi uiProp = Instantiate(propUiPrefab, _uiPropList);
                 BaseProp prop = _props[keyValue.Key];
                 uiProp.Init(prop.name, prop.propImage, _propsCount[prop.name]);
                 _uiProps.Add(keyValue.Key, uiProp);
             }
-            uiPropList.gameObject.SetActive(false);
+            _uiPropList.gameObject.SetActive(false);
         }
         private void OnDestroy()
         {
@@ -96,10 +96,10 @@ namespace gmtk_gamejam.PropSystem
             switch (state)
             {
                 case PlayerState.Simulation:
-                    uiPropList.gameObject.SetActive(false);
+                    _uiPropList.gameObject.SetActive(false);
                     break;
                 case PlayerState.PropSetup:
-                    uiPropList.gameObject.SetActive(true);
+                    _uiPropList.gameObject.SetActive(true);
                     break;
             }
         }

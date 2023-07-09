@@ -129,6 +129,7 @@ MonoBehaviour:
   attackLayer:
     serializedVersion: 2
     m_Bits: 128
+  attackSpeedMultiplier: 1
   line: {fileID: 2883512547712538370}
   sharkData: {fileID: 11400000, guid: 82b44abd41458084f8a34f8cc9514f1b, type: 2}
 --- !u!1 &2715182918930465723

@@ -145,7 +145,7 @@ namespace gmtk_gamejam
 
         private void LaunchState()
         {
-            _curveTime += Time.deltaTime + attackSpeedMultiplier;
+            _curveTime += Time.deltaTime * attackSpeedMultiplier;
             Vector2 targetPos = _attackCurve.GetPos(_curveTime);
             transform.position = targetPos;
 

@@ -1,4 +1,6 @@
+using gmtk_gamejam.AbillitySystem;
 using gmtk_gamejam.CameraSystem;
+using gmtk_gamejam.PropSystem;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -7,21 +9,28 @@ namespace gmtk_gamejam.LevelSystem
 {
     public class LevelController : MonoBehaviour
     {
+        [Header("Level Reference")]
         [SerializeField] private Tilemap spawnable;
+        [SerializeField] private PropManager propManager;
+        [SerializeField] private AbilityManager abilityManager;
         [SerializeField] private Transform obstacleParent;
-        [Header("Reference")]
-        [SerializeField] private CameraFollow cameraFollow;
         [Header("Prefabs")]
         [SerializeField] private RaftController raftPrefab;
         [SerializeField] private GameObject obstaclePrefab;
         [SerializeField] private GameObject levelCompletePrefab;
 
         private List<GameObject> _obstacles;
+        private GameManager _gameManager;
         private RaftController _raft;
+        private CameraFollow _cameraFollow;
 
         private void Start()
         {
+            _gameManager = GameManager.Instance;
             _obstacles = new List<GameObject>();
+            _cameraFollow = Camera.main.gameObject.GetComponent<CameraFollow>();
+            propManager.Setup(_gameManager.uiPropList);
+            abilityManager.Setup(_gameManager.levelUpPanel, _gameManager.cards);
             SetupLevel();
         }
 
@@ -47,10 +56,10 @@ namespace gmtk_gamejam.LevelSystem
                                 RaftController raft = Instantiate(raftPrefab);
                                 raft.transform.position = pos;
                                 _raft = raft;
-                                cameraFollow.SetTarget(_raft.transform);
+                                _cameraFollow.SetTarget(_raft.transform);
                                 break;
                             case "levelcomplete_tile":
-                                GameObject levelComplete = Instantiate(levelCompletePrefab, pos, Quaternion.identity);
+                                Instantiate(levelCompletePrefab, pos, Quaternion.identity);
                                 break;
                             default:
                                 break;
