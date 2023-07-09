@@ -219,7 +219,7 @@ MonoBehaviour:
   attackTime: 3
   lootDamage: 5
   tresure: {fileID: 2329940893983359184}
-  expPoints: 1
+  expPoints: 2
 --- !u!95 &7945239946451263495
 Animator:
   serializedVersion: 5
