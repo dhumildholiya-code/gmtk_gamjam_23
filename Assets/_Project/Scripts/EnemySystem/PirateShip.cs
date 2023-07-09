@@ -19,6 +19,7 @@ namespace gmtk_gamejam.EnemySystem
         [SerializeField] private int maxHealth;
         [SerializeField] private GameObject health;
         [SerializeField] private Image healthBar;
+        [SerializeField] private ParticleSystem deathEffect;
         [Header("Attack")]
         [SerializeField] private LayerMask detectLayer;
         [SerializeField] private float detectRange;
@@ -65,6 +66,7 @@ namespace gmtk_gamejam.EnemySystem
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
+                Instantiate(deathEffect, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

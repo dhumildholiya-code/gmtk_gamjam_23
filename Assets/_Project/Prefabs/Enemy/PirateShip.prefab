@@ -117,7 +117,7 @@ Transform:
   - {fileID: 2038333984994651165}
   - {fileID: 4362285933482521752}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &5415420316782809744
 BoxCollider2D:
@@ -179,6 +179,7 @@ MonoBehaviour:
   maxHealth: 5
   health: {fileID: 1447655665614016780}
   healthBar: {fileID: 7318467218100399152}
+  deathEffect: {fileID: 5353393537845343228, guid: 414994fc317936040b7082c7fe3001e5, type: 3}
   detectLayer:
     serializedVersion: 2
     m_Bits: 64
