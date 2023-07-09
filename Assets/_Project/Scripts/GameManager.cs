@@ -76,6 +76,7 @@ namespace gmtk_gamejam
         public void ChangeState(GameState newState)
         {
             _state = newState;
+            raft.gameObject.SetActive(true);
             uiManager.UpdateState(_state);
 
             switch (_state)
