@@ -4631,7 +4631,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6526081237918987526}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -4723,7 +4723,9 @@ MonoBehaviour:
   sharkCount: 0
   maxTresure: 50
   direction: 3
+  tutorial: 1
   spawnable: {fileID: 5444976183725531536}
+  _playerController: {fileID: 2136260860016504412}
   propManager: {fileID: 4054933736941525137}
   abilityManager: {fileID: 6059582833673911568}
   obstacleParent: {fileID: 5388560725645510794}

@@ -58,6 +58,14 @@ namespace gmtk_gamejam
             _camFollow = Camera.main.gameObject.GetComponent<CameraFollow>();
             ChangeState(GameState.MainMenu);
         }
+        public void ShowMoveTutorial(bool isActive)
+        {
+            uiManager.ShowMoveTutorial(isActive);
+        }
+        public void ShowPropTutorial(bool isActive)
+        {
+            uiManager.ShowPropTutorial(isActive);
+        }
 
         #region StateMachine Methods
         private IEnumerator Co_LoadLevel()

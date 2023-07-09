@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace gmtk_gamejam.Ui
 {
@@ -8,6 +9,8 @@ namespace gmtk_gamejam.Ui
         [SerializeField] private GameObject gameHUD;
         [SerializeField] private LevelLoadingMenu levelLoadingScreen;
         [SerializeField] private GameObject winMenu;
+        [SerializeField] private GameObject moveTutorial;
+        [SerializeField] private GameObject propTutorial;
 
         public void UpdateState(GameState state)
         {
@@ -37,6 +40,15 @@ namespace gmtk_gamejam.Ui
                 case GameState.Win:
                     break;
             }
+        }
+
+        public void ShowMoveTutorial(bool isActive)
+        {
+            moveTutorial.SetActive(isActive);
+        }
+        public void ShowPropTutorial(bool isActive)
+        {
+            propTutorial.SetActive(isActive);
         }
     }
 }
