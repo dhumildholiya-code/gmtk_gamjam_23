@@ -12,7 +12,8 @@ namespace gmtk_gamejam.LevelSystem
         [SerializeField] private int sharkCount;
         [SerializeField] private int maxTresure;
         [SerializeField] private Direction direction;
-        [SerializeField] private bool tutorial;
+        [SerializeField] private int startTutorialId;
+        [SerializeField] private int tutorialWindowCount;
         [Header("Level Reference")]
         [SerializeField] private Tilemap spawnable;
         [SerializeField] private PlayerController _playerController;
@@ -34,7 +35,7 @@ namespace gmtk_gamejam.LevelSystem
             _spawnObjects = new List<GameObject>();
             propManager.Setup(_gameManager.uiPropList);
             abilityManager.Setup(_gameManager.levelUpPanel, _gameManager.cards);
-            _playerController.Setup(tutorial);
+            _playerController.Setup(startTutorialId, tutorialWindowCount);
             SetupLevel();
         }
         public void CleanUp()

@@ -29,7 +29,6 @@ namespace gmtk_gamejam.AbillitySystem
         {
             if (abilities.Length <= 2)
             {
-                Debug.LogError($"{this.name} need atleast two abilities. Currently we have {abilities.Length}.");
                 return;
             }
             var twoAbillity = abilities.OrderBy(x => Random.value).Take(_cards.Length).ToArray();

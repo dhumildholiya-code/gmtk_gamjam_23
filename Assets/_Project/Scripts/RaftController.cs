@@ -169,9 +169,10 @@ namespace gmtk_gamejam
                 transform.DOMove(directionalProp.transform.position, 1f).OnComplete(() =>
                 {
                     Move(directionalProp.direction);
+                    Destroy(other.gameObject);
                 });
             }
-            if (other.CompareTag("levelComplete"))
+            else if (other.CompareTag("levelComplete"))
             {
                 Debug.Log("win");
                 GameManager.Instance.ChangeStateDelay(GameState.LevelComplete, 1f);

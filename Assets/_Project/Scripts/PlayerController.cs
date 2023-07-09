@@ -16,16 +16,16 @@ namespace gmtk_gamejam
         [SerializeField] private PlayerState startState;
 
         private PlayerState _state;
-        private bool _isTutorial;
+        private int _tutorialId;
         private int _tutorialCount;
 
         private void Start()
         {
         }
-        public void Setup(bool isTutorial)
+        public void Setup(int tutorialId, int tutorialCount)
         {
-            _tutorialCount = 2;
-            _isTutorial = isTutorial;
+            _tutorialCount = tutorialCount;
+            _tutorialId = tutorialId;
             ChangeState(startState);
         }
         public void CleanUp()
@@ -76,21 +76,21 @@ namespace gmtk_gamejam
             {
                 case PlayerState.Simulation:
                     Time.timeScale = 1.0f;
-                    if(_tutorialCount > 0 && _isTutorial)
+                    if (_tutorialCount > 0 && (_tutorialId == 0 || _tutorialId == 2))
                     {
-                        GameManager.Instance.ShowPropTutorial(false);
+                        GameManager.Instance.ShowTutorial(_tutorialId);
+                        _tutorialId++;
                         _tutorialCount--;
-                        GameManager.Instance.ShowMoveTutorial(true);
                         Time.timeScale = 0f;
                     }
                     break;
                 case PlayerState.PropSetup:
                     Time.timeScale = 0f;
-                    if(_tutorialCount > 0 && _isTutorial)
+                    if (_tutorialCount > 0 && _tutorialId == 1)
                     {
-                        GameManager.Instance.ShowMoveTutorial(false);
+                        GameManager.Instance.ShowTutorial(_tutorialId);
+                        _tutorialId++;
                         _tutorialCount--;
-                        GameManager.Instance.ShowPropTutorial(true);
                     }
                     break;
             }

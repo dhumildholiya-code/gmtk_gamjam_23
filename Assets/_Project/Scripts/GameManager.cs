@@ -58,13 +58,9 @@ namespace gmtk_gamejam
             _camFollow = Camera.main.gameObject.GetComponent<CameraFollow>();
             ChangeState(GameState.MainMenu);
         }
-        public void ShowMoveTutorial(bool isActive)
+        public void ShowTutorial(int id)
         {
-            uiManager.ShowMoveTutorial(isActive);
-        }
-        public void ShowPropTutorial(bool isActive)
-        {
-            uiManager.ShowPropTutorial(isActive);
+            uiManager.ShowTutorial(id);
         }
 
         #region StateMachine Methods
@@ -90,6 +86,7 @@ namespace gmtk_gamejam
                     StartCoroutine(Co_LoadLevel());
                     break;
                 case GameState.Gameplay:
+                    _camFollow.transform.position = new Vector3(0f,0f, -10f);
                     _currentLevel.Setup(Instance, raft);
                     break;
                 case GameState.LevelComplete:

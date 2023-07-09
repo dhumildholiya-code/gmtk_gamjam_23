@@ -22,7 +22,6 @@ namespace gmtk_gamejam.CameraSystem
         private void Update()
         {
             if (_target == null) return;
-            if (transform.position.x >= xBoundry) return;
 
             Vector3 targetPos = new Vector3(_target.position.x, yOffset, transform.position.z) - _offset;
             transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothFactor);
@@ -31,6 +30,10 @@ namespace gmtk_gamejam.CameraSystem
             {
                 transform.position = new Vector3(0f, yOffset, transform.position.z);
             }
+            if (transform.position.x > xBoundry)
+            {
+                transform.position = new Vector3(xBoundry, yOffset, transform.position.z);
+            } 
         }
     }
 }
