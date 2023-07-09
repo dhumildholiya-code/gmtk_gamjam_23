@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 106771947932978911}
   - component: {fileID: 5455752718428007146}
   - component: {fileID: 9065160217292063215}
+  - component: {fileID: 7134908939441201578}
   m_Layer: 0
   m_Name: Boulder2
   m_TagString: obstacle
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1101611221
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: be24ad1fe685e6b4480d72172d770126, type: 3}
+  m_Sprite: {fileID: -1012143869, guid: be24ad1fe685e6b4480d72172d770126, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,3 +131,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &7134908939441201578
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3639939899118992560}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b6c9d0cd3fa4aa43abdb83885396ed4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

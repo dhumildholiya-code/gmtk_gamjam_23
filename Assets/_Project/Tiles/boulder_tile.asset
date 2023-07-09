@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: boulder_tile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 35d85fe3d05931246adba526a1564296, type: 3}
+  m_Sprite: {fileID: -945744994, guid: 5a1d2c32d1bef2943b4486ef41177e0a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

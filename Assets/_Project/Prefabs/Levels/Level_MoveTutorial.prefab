@@ -4732,6 +4732,6 @@ MonoBehaviour:
   abilityManager: {fileID: 6059582833673911568}
   obstacleParent: {fileID: 5388560725645510794}
   boulderPrefabs:
-  - {fileID: 3639939899118992560, guid: 05c3e917d6f690945a1d200f6f031900, type: 3}
+  - {fileID: 4578068976622551720, guid: 05c3e917d6f690945a1d200f6f031900, type: 3}
   - {fileID: 3639939899118992560, guid: cb70924d4369ebf4dbb9d4495514f052, type: 3}
   levelCompletePrefab: {fileID: 1962157681764773547, guid: abbc91f20f692fd438a69fe49bc4e049, type: 3}

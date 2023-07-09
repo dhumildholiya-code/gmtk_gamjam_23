@@ -116,7 +116,7 @@ namespace gmtk_gamejam
 
         private void AttackSate()
         {
-            if(_target == null)
+            if(_target == null || _target.Damagable == null)
             {
                 ChangeState(SharkState.Return);
                 return;

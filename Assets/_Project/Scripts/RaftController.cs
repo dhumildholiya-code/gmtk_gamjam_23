@@ -23,7 +23,8 @@ namespace gmtk_gamejam
         [Header("Tresure")]
         [SerializeField] private int maxTresure;
         [Header("Experience")]
-        [SerializeField] private int maxExp;
+        [SerializeField] private int startExp;
+        [SerializeField] private int diffExp;
 
         [Header("Shark variables")]
         [SerializeField] private int startSharkCount;
@@ -42,6 +43,8 @@ namespace gmtk_gamejam
 
         private int _currentTresure;
         private int _currentExp;
+        private int _levelId;
+        private int _maxExp;
         private Direction _oldDirection;
 
         private void Start()
@@ -58,6 +61,8 @@ namespace gmtk_gamejam
         }
         public void Setup(int maxTresure, int sharkCount, Direction direction)
         {
+            _levelId = 0;
+            _maxExp = startExp + diffExp * _levelId;
             this.maxTresure = maxTresure;
             this.startSharkCount = sharkCount;
             _currentTresure = maxTresure;
@@ -141,17 +146,15 @@ namespace gmtk_gamejam
         }
         private void AddExp(int exp)
         {
-            if (_currentExp + exp >= maxExp)
+            _currentExp += exp;
+            OnExpChange?.Invoke(_currentExp, _maxExp);
+            if (_currentExp >= _maxExp)
             {
-                //Leve Up.
-                OnLevelUp?.Invoke();
+                _levelId++;
                 _currentExp = 0;
-                OnExpChange?.Invoke(_currentExp, maxExp);
-            }
-            else
-            {
-                _currentExp += exp;
-                OnExpChange?.Invoke(_currentExp, maxExp);
+                _maxExp = startExp + diffExp * _levelId;
+                OnExpChange?.Invoke(_currentExp, _maxExp);
+                OnLevelUp?.Invoke();
             }
         }
 

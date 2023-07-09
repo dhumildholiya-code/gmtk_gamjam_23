@@ -44,11 +44,14 @@ namespace gmtk_gamejam.EnemySystem
 
         public ITakeDamage Damagable => this;
 
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+        }
         private void Start()
         {
             _currentHealth = maxHealth;
             health.SetActive(false);
-            _animator = GetComponent<Animator>();
             ChangeState(EnemyState.Detect);
         }
 
@@ -60,8 +63,10 @@ namespace gmtk_gamejam.EnemySystem
         {
             if (_currentHealth - damage <= 0)
             {
+                _currentHealth = 0;
                 OnDeathCollectExp?.Invoke(expPoints);
-                Destroy(gameObject);
+                if (gameObject)
+                    Destroy(gameObject);
             }
             transform.DOShakePosition(.3f, .2f);
             _currentHealth -= damage;
@@ -69,7 +74,7 @@ namespace gmtk_gamejam.EnemySystem
             {
                 health.SetActive(true);
             }
-            healthBar.DOFillAmount(_currentHealth * 1f/ maxHealth, .2f);
+            healthBar.DOFillAmount(_currentHealth * 1f / maxHealth, .2f);
         }
         public Transform GetTransform()
         {
@@ -77,11 +82,11 @@ namespace gmtk_gamejam.EnemySystem
         }
         public Vector2 GetPos(float timePased)
         {
-            if(_speed <= 0f)
+            if (_speed <= 0f)
             {
                 return transform.position;
             }
-            Vector2 pos = transform.position + transform.up *_speed * timePased; 
+            Vector2 pos = transform.position + transform.up * _speed * timePased;
             return pos;
         }
 
@@ -180,6 +185,7 @@ namespace gmtk_gamejam.EnemySystem
         public void SetTarget(RaftController target)
         {
             _target = target;
+            ChangeState(EnemyState.Chase);
         }
 
         private void OnDrawGizmos()

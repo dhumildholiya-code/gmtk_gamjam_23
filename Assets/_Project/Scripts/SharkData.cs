@@ -14,7 +14,7 @@ namespace gmtk_gamejam
         public void DataReset()
         {
             attackDamage = 1;
-            attackRange = 4f;
+            attackRange = 5.5f;
             bounceAttackRange = 2f;
             attackTarget = 1;
         }
