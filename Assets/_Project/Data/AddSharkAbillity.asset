@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 4c1812dc468585f41aaaa442d18575e0, type: 3}
   m_Name: AddSharkAbillity
-  m_EditorClassIdentifier: Assembly-CSharp:gmtk_gamejam.AbillitySystem:AddSharkAbillity
+  m_EditorClassIdentifier: 
   name: Add_Shark
-  description: Add new shark around raft.
+  description: Add {amount} shark around raft for protection.
   amount: 1
-  sharkData: {fileID: 11400000, guid: 82b44abd41458084f8a34f8cc9514f1b, type: 2}

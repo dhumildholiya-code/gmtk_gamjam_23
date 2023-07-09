@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 1106abf20e7a0574985b3c6ad487026b, type: 3}
   m_Name: AddTargetAbillity
-  m_EditorClassIdentifier: Assembly-CSharp:gmtk_gamejam.AbillitySystem:AddTargetAbillity
+  m_EditorClassIdentifier: 
   name: Add_Target
-  description: Shark can target multiple target in one attack. Add {amount} to existing
-    target count.
+  description: Add {amount} bounce target which allow shark to bounce between enemies.
   amount: 1
   sharkData: {fileID: 11400000, guid: 82b44abd41458084f8a34f8cc9514f1b, type: 2}

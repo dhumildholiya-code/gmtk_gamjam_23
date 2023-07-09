@@ -12,24 +12,4 @@ namespace gmtk_gamejam.AbillitySystem
             OnAddShark?.Invoke();
         }
     }
-
-    [CreateAssetMenu(fileName = "AddDamageAbillity", menuName = "Abillity / AddDamageAbillity")]
-    public class AddDamageAbillity : Ability
-    {
-        [SerializeField] private SharkData sharkData;
-        public override void Execute()
-        {
-            sharkData.attackDamage += amount;
-        }
-    }
-
-    [CreateAssetMenu(fileName = "AddTargetAbillity", menuName = "Abillity / AddTargetAbillity")]
-    public class AddTargetAbillity : Ability
-    {
-        [SerializeField] private SharkData sharkData;
-        public override void Execute()
-        {
-            sharkData.attackTarget += amount;
-        }
-    }
 }
