@@ -18,8 +18,7 @@ namespace gmtk_gamejam.LevelSystem
         [SerializeField] private AbilityManager abilityManager;
         [SerializeField] private Transform obstacleParent;
         [Header("Prefabs")]
-        [SerializeField] private GameObject boulder1Prefab;
-        [SerializeField] private GameObject boulder2Prefab;
+        [SerializeField] private GameObject[] boulderPrefabs;
         [SerializeField] private GameObject levelCompletePrefab;
 
         private List<GameObject> _spawnObjects;
@@ -60,13 +59,10 @@ namespace gmtk_gamejam.LevelSystem
                         Vector3 pos = spawnable.GetCellCenterWorld(new Vector3Int(x + bounds.position.x, y + bounds.position.y, 0));
                         switch (tile.name)
                         {
-                            case "boulder1_tile":
-                                GameObject obstacle1 = Instantiate(boulder1Prefab, pos, Quaternion.identity, obstacleParent);
-                                _spawnObjects.Add(obstacle1);
-                                break;
-                            case "boulder2_tile":
-                                GameObject obstacle2 = Instantiate(boulder2Prefab, pos, Quaternion.identity, obstacleParent);
-                                _spawnObjects.Add(obstacle2);
+                            case "boulder_tile":
+                                int id = Random.Range(0, boulderPrefabs.Length);
+                                GameObject boulder = Instantiate(boulderPrefabs[id], pos, Quaternion.identity, obstacleParent);
+                                _spawnObjects.Add(boulder);
                                 break;
                             case "water_tile":
                                 _raft.transform.position = pos;
