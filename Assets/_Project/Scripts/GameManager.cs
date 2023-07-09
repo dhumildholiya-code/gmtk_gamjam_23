@@ -2,7 +2,9 @@ using gmtk_gamejam.AbillitySystem;
 using gmtk_gamejam.CameraSystem;
 using gmtk_gamejam.LevelSystem;
 using gmtk_gamejam.Ui;
+using System;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace gmtk_gamejam
@@ -109,6 +111,19 @@ namespace gmtk_gamejam
                 case GameState.Win:
                     break;
             }
+        }
+
+        public void ChangeStateDelay(GameState newState, float delayTime)
+        {
+            StartCoroutine(Co_WaitForAction(delayTime, () =>
+            {
+                ChangeState(newState);
+            }));
+        }
+        private IEnumerator Co_WaitForAction(float time, Action callback)
+        {
+            yield return new WaitForSeconds(time);
+            callback.Invoke();
         }
         #endregion
     }

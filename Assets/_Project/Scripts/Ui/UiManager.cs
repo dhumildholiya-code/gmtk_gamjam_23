@@ -13,7 +13,11 @@ namespace gmtk_gamejam.Ui
         {
             mainMenu.SetActive(state == GameState.MainMenu);
             gameHUD.SetActive(state == GameState.Gameplay);
-            levelLoadingScreen.gameObject.SetActive(state == GameState.LevelLoading);
+            levelLoadingScreen.gameObject.SetActive(
+                state == GameState.LevelLoading
+                || state == GameState.LevelComplete
+                || state == GameState.LevelFailed
+                );
             winMenu.SetActive(state == GameState.Win);
 
             switch (state)

@@ -70,6 +70,7 @@ namespace gmtk_gamejam
         }
         public void CleanUp()
         {
+            transform.position = new Vector2(-6.5f, .5f);
             for (int i = _sharks.Count - 1; i >= 0; i--)
             {
                 _sharks[i].CleanUp();
@@ -117,7 +118,7 @@ namespace gmtk_gamejam
             if (_currentTresure - amount <= 0)
             {
                 // TODO : die / game over.
-                GameManager.Instance.ChangeState(GameState.LevelFailed);
+                GameManager.Instance.ChangeStateDelay(GameState.LevelFailed, 1f);
             }
             _currentTresure -= amount;
             OnTresureChange?.Invoke(_currentTresure, maxTresure);
@@ -158,7 +159,7 @@ namespace gmtk_gamejam
         {
             if (other.gameObject.CompareTag("obstacle"))
             {
-                GameManager.Instance.ChangeState(GameState.LevelFailed);
+                GameManager.Instance.ChangeStateDelay(GameState.LevelFailed, 1f);
             }
         }
         private void OnTriggerEnter2D(Collider2D other)
@@ -171,7 +172,7 @@ namespace gmtk_gamejam
             if (other.CompareTag("levelComplete"))
             {
                 Debug.Log("win");
-                GameManager.Instance.ChangeState(GameState.LevelComplete);
+                GameManager.Instance.ChangeStateDelay(GameState.LevelComplete, 1f);
             }
         }
 
