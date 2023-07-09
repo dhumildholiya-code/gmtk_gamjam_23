@@ -113,6 +113,11 @@ namespace gmtk_gamejam
 
         private void AttackSate()
         {
+            if(_target == null)
+            {
+                ChangeState(SharkState.Return);
+                return;
+            }
             _target.Damagable.TakeDamage(sharkData.attackDamage);
             _targetCounter--;
             // Check for other nearby enemies if attack target is > 1.
