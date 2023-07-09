@@ -7,8 +7,8 @@ namespace gmtk_gamejam.AbillitySystem
     {
         [SerializeField] private Ability[] abilities;
 
-         private GameObject _levelUpPanel;
-         private AbilityCard[] _cards;
+        private GameObject _levelUpPanel;
+        private AbilityCard[] _cards;
 
         public void Setup(GameObject levelUpPanel, AbilityCard[] cards)
         {
@@ -27,6 +27,11 @@ namespace gmtk_gamejam.AbillitySystem
 
         private void CreateCards()
         {
+            if (abilities.Length <= 2)
+            {
+                Debug.LogError($"{this.name} need atleast two abilities. Currently we have {abilities.Length}.");
+                return;
+            }
             var twoAbillity = abilities.OrderBy(x => Random.value).Take(_cards.Length).ToArray();
             for (int i = 0; i < twoAbillity.Count(); i++)
             {
