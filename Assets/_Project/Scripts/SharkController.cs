@@ -22,6 +22,7 @@ namespace gmtk_gamejam
 
         [Header("Attack")]
         [SerializeField] private LayerMask attackLayer;
+        [SerializeField] private float attackSpeedMultiplier;
         [SerializeField] private LineRenderer line;
         [SerializeField] private SharkData sharkData;
 
@@ -36,6 +37,7 @@ namespace gmtk_gamejam
         private ITarget _target;
         private Vector2 _prevPos;
         private Vector2 _lastPosBeforeAttack;
+        private int _targetCounter;
         private float _time;
         private float _curveTime;
         private float _phase;
@@ -95,7 +97,7 @@ namespace gmtk_gamejam
 
         private void ReturnState()
         {
-            _curveTime += Time.deltaTime;
+            _curveTime += Time.deltaTime * attackSpeedMultiplier;
             Vector2 targetPos = _returnCurve.GetPos(_curveTime);
             transform.position = targetPos;
 
@@ -112,15 +114,38 @@ namespace gmtk_gamejam
         private void AttackSate()
         {
             _target.Damagable.TakeDamage(sharkData.attackDamage);
+            _targetCounter--;
             // Check for other nearby enemies if attack target is > 1.
-            // go to launch if we find other enemies.
-
+            if (_targetCounter > 0)
+            {
+                Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, sharkData.bounceAttackRange, attackLayer);
+                if (targets.Length == 0)
+                {
+                    ChangeState(SharkState.Return);
+                    return;
+                }
+                //select target who is not equal to old target.
+                int index = 0;
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    if (targets[i].transform == _target.GetTransform()) continue;
+                    index = i;
+                    break;
+                }
+                Collider2D target = targets[index];
+                _target = target.GetComponent<ITarget>();
+                if (_target != null)
+                {
+                    ChangeState(SharkState.Launch);
+                    return;
+                }
+            }
             ChangeState(SharkState.Return);
         }
 
         private void LaunchState()
         {
-            _curveTime += Time.deltaTime;
+            _curveTime += Time.deltaTime + attackSpeedMultiplier;
             Vector2 targetPos = _attackCurve.GetPos(_curveTime);
             transform.position = targetPos;
 
@@ -164,7 +189,11 @@ namespace gmtk_gamejam
                 {
                     _target = hit.collider.GetComponent<ITarget>();
                     if (_target != null)
+                    {
+                        _lastPosBeforeAttack = transform.position;
+                        _targetCounter = sharkData.attackTarget;
                         ChangeState(SharkState.Launch);
+                    }
                     else
                         ChangeState(SharkState.Idle);
                 }
@@ -213,7 +242,6 @@ namespace gmtk_gamejam
                 case SharkState.Launch:
                     _curveTime = 0f;
                     _attackCurve = new QuadraticBezierCurve(transform.position, _target.GetPos(.8f));
-                    _lastPosBeforeAttack = transform.position;
                     line.gameObject.SetActive(false);
                     break;
                 case SharkState.Attack:
@@ -241,6 +269,8 @@ namespace gmtk_gamejam
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireSphere(_raft.Position, _moveRadius);
             }
+            Gizmos.color = Color.black;
+            Gizmos.DrawWireSphere(transform.position, sharkData.bounceAttackRange);
 
             Gizmos.color = Color.magenta;
             if (_attackCurve != null)

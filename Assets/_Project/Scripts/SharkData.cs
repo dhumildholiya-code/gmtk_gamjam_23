@@ -7,6 +7,7 @@ namespace gmtk_gamejam
     {
         public int attackDamage;
         public float attackRange;
+        public float bounceAttackRange;
         public int attackTarget;
 
 #if UNITY_EDITOR
@@ -15,6 +16,7 @@ namespace gmtk_gamejam
         {
             attackDamage = 1;
             attackRange = 6f;
+            bounceAttackRange = 2f;
             attackTarget = 1;
         }
 #endif

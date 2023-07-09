@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace gmtk_gamejam.Ui
@@ -19,7 +20,7 @@ namespace gmtk_gamejam.Ui
         private void HandleExpChange(int updateValue, int maxAmount)
         {
             float percentage =  (updateValue*1f / maxAmount*1f);
-            bar.fillAmount = percentage; 
+            bar.DOFillAmount(percentage, .3f);
         }
     }
 }

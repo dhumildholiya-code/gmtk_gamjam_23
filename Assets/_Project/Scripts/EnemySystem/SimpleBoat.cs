@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,7 @@ namespace gmtk_gamejam.EnemySystem
         [SerializeField] private float attackRange;
         [SerializeField] private float attackTime;
         [SerializeField] private int lootDamage;
+        [SerializeField] private GameObject tresure;
         [Header("Exp")]
         [SerializeField] private int expPoints;
 
@@ -61,12 +63,17 @@ namespace gmtk_gamejam.EnemySystem
                 OnDeathCollectExp?.Invoke(expPoints);
                 Destroy(gameObject);
             }
+            transform.DOShakePosition(.3f, .2f);
             _currentHealth -= damage;
             if (_currentHealth < maxHealth)
             {
                 health.SetActive(true);
             }
-            healthBar.fillAmount = _currentHealth * 1f / maxHealth;
+            healthBar.DOFillAmount(_currentHealth * 1f/ maxHealth, .2f);
+        }
+        public Transform GetTransform()
+        {
+            return transform;
         }
         public Vector2 GetPos(float timePased)
         {
@@ -117,6 +124,7 @@ namespace gmtk_gamejam.EnemySystem
             if (_attackTimer <= 0f)
             {
                 _attackTimer = attackTime;
+                tresure.SetActive(true);
                 _target.RemoveTresure(lootDamage);
             }
             _attackTimer -= Time.deltaTime;

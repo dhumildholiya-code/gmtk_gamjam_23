@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SharkData
   m_EditorClassIdentifier: 
   attackDamage: 1
-  attackRange: 6
+  attackRange: 5
+  bounceAttackRange: 2
   attackTarget: 1
